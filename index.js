@@ -29,6 +29,15 @@ const sequelize = new Sequelize({
   storage: "./storage/data.db", // Path to the file that will store the SQLite DB.
 });
 
+//bobk - checking problem 
+app.get("/status", (request, response) => {
+  const status = {
+     "Status": "Running"
+  };
+  
+  response.send(status);
+});
+
 // Initialising the Model on sequelize
 UserModel.initialise(sequelize);
 ProductModel.initialise(sequelize);
