@@ -4,7 +4,7 @@ const { jwtSecret } = require("../../config");
 module.exports = {
   check: (req, res, next) => {
     const authHeader = req.headers['authorization'];
-
+    console.log('isAuthenticatedMiddleware-check():', authHeader);
     // IF no auth headers are provided
     // THEN return 401 Unauthorized error
     if (!authHeader) {
@@ -40,6 +40,7 @@ module.exports = {
       })
     }
 
+    // verify decodes the token to produce user (or err)
     jwt.verify(token, jwtSecret, (err, user) => {
       if (err) {
         return res.status(403).json({
@@ -48,7 +49,10 @@ module.exports = {
         });
       }
 
-      req.user = user; // Save the user object for further use
+      console.log('isAuthenticatedMiddleware-check()-user:', user);
+      // Save the user object for further use
+      // eg. This is how the app can know who the logged in user is
+      req.user = user;
       next();
     });
   }

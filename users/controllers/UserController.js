@@ -79,6 +79,7 @@ module.exports = {
   },
 
   getAllUsers: (req, res) => {
+    console.log('getAllUsers');
     UserModel.findAllUsers(req.query)
       .then((users) => {
         return res.status(200).json({
