@@ -97,7 +97,8 @@ module.exports = {
         // Generating an AccessToken for the user, which will be
         // required in every subsequent request.
         const accessToken = generateAccessToken(user.username, user.id);
-
+        console.log(accessToken)
+        
         return res.status(200).json({
           status: true,
           data: {
